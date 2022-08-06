@@ -156,7 +156,7 @@
                 tab2:false,
                 async loadQas() {
                     this.isLoading = true;
-                    await fetchJsonp(url1)
+                    await fetch(url1)
                         .then(res => res.text())
                         .then(rep => {
                             //Remove additional text and extract only JSON:
@@ -183,7 +183,7 @@
                             });
                             this.allQas = qas
                         })
-                        await fetchJsonp(url2)
+                        await fetch(url2)
                         .then(res => res.text())
                         .then(rep => {
                             //Remove additional text and extract only JSON:
