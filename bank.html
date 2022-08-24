@@ -14,7 +14,7 @@
             }
         </style>
     </head>
-    <body x-data="qasData()">
+    <body x-data="qasData()" class="bg-indigo-50">
         <!-- drawer init and show -->
         <div class="flex flex-col">
             <div class="fixed bottom-5 right-5 md:right-40 rounded-full py-2 px-3 bg-rose-700 cursor-pointer" @click="loadQas">
@@ -46,7 +46,12 @@
                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22L20 20" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </div>
                                 <div class="flex space-x-5">
-                                    <input x-model="keyword" @keyup="searchData" type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-gray-600 focus:border-grey-600 block w-full pl-10 p-2.5" placeholder="search" autocomplete="off">
+                                    <input x-model="keyword" @keyup="searchData(true)" type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-gray-600 focus:border-grey-600 block w-full pl-10 p-2.5" placeholder="search" autocomplete="off">
+                                </div>
+                                <div @click="searchData(false)" class="flex absolute inset-y-0 right-0 items-center pr-3 cursor-pointer">
+                                    <span class="material-icons text-2xl text-gray-500">
+                                        close
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +70,18 @@
                                             </button>
                                         </h2>
                                         <div  x-show="info.isOpen" class="transition-all duration-1000">
-                                            <div x-text="info.answer" class="p-5 font-light border border-teal-600 font-semibold text-lg">
-                                            
+                                            <div class="p-5 font-light border border-green-600 font-semibold text-lg">
+                                                <div x-text="info.answer">
+                                                
+                                                </div>
+                                                <div class="flex justify-end">
+                                                    <span x-show="info.play" @click="utter(info,true),info.play=!info.play" class="material-icons text-3xl text-green-800">
+                                                        play_circle
+                                                    </span>
+                                                    <span x-show="!info.play" @click="utter(info,false),info.play=!info.play" class="material-icons text-3xl text-red-500">
+                                                        cancel
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,6 +162,8 @@
             
             const output = document.querySelector('.output')
 
+            const synth = window.speechSynthesis;
+            synth.cancel()
             function qasData() {
                 return {
                     allQas: null,
@@ -178,6 +195,7 @@
                                             data.index = index
                                             data.isOpen = false
                                             data.isShow = true
+                                            data.play = true
                                             qas.push(data)
                                         } 
                                         index++;
@@ -195,33 +213,58 @@
                             } else {
                                 if(status==true) {
                                     this.allQas[i].isOpen = false
+                                    synth.cancel();
+                                    this.allQas[i].play = true
                                 } else {
                                     this.allQas[i].isOpen = true
                                 }
                             }
                         }
                     },
-                    searchData() {
-                        var searchArray =[];
-                        // console.log(this.keyword)
-                        
-                        // console.log(searchArray)
-                        if(this.keyword.length>=3) {
-                            for (var i = 0; i < this.allQas.length; i++) {
-                                var question = this.allQas[i].question.toLowerCase()
-                                var key = this.keyword.toLowerCase()
-                                if(!question.includes(key)) {
-                                    this.allQas[i].isShow = false
-                                } else {
+                    searchData(status) {
+                        if(status) {
+                            var searchArray =[];
+                            // console.log(this.keyword)
+                            
+                            // console.log(searchArray)
+                            if(this.keyword.length>=3 && this.keyword != null) {
+                                for (var i = 0; i < this.allQas.length; i++) {
+                                    var question = this.allQas[i].question.toLowerCase()
+                                    var key = this.keyword.toLowerCase()
+                                    if(!question.includes(key)) {
+                                        this.allQas[i].isShow = false
+                                    } else {
+                                        this.allQas[i].isShow = true
+                                    }
+                                }
+                            } else {
+                                for (var i = 0; i < this.allQas.length; i++) {
                                     this.allQas[i].isShow = true
                                 }
                             }
                         } else {
+                            this.keyword = ""
                             for (var i = 0; i < this.allQas.length; i++) {
                                 this.allQas[i].isShow = true
                             }
                         }
                     },
+                    utter(info,playStatus) {
+                        let voices = [];
+                        voices = synth.getVoices();
+                        if(playStatus) {
+                            const msg = new SpeechSynthesisUtterance();
+                            msg.voice = voices[90]; 
+                            msg.text = info.question;
+                            msg.pitch = 0
+                            msg.rate = 1;
+                            speechSynthesis.speak(msg);
+                            msg.text = info.answer;
+                            speechSynthesis.speak(msg);
+                        } else {
+                            synth.cancel();
+                        }
+                    }
                 }
             }
         </script>
