@@ -276,6 +276,7 @@
                             msg.rate = 1;
                             speechSynthesis.speak(msg);
                             msg.text = info.answer;
+                            speechSynthesis.speak(msg);
                         } else {
                             synth.cancel();
                         }
