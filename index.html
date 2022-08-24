@@ -164,6 +164,13 @@
 
             const synth = window.speechSynthesis;
             synth.cancel()
+
+
+            const voices = synth.getVoices();
+            // setTimeout(() => {
+                // },5000);
+            
+
             function qasData() {
                 return {
                     allQas: null,
@@ -252,9 +259,18 @@
                     utter(info,status) {
                         let voices = [];
                         voices = synth.getVoices();
+                        console.log(voices)
+                        console.log(voices.length)
+                        for (let i = 0; i < voices.length; i++) {
+                            console.log(i)
+                            console.log(`${voices[i].lang}`)
+                            console.log(voices[i].lang)
+                            console.log(voices[i].name)
+                        }
+                       
                         if(status) {
                             const msg = new SpeechSynthesisUtterance();
-                            msg.voice = voices[90]; 
+                            msg.voice = voices[89]; 
                             msg.text = info.question;
                             msg.pitch = 0
                             msg.rate = 1;
