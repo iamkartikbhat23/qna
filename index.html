@@ -270,12 +270,28 @@
                        
                         if(status) {
                             const msg = new SpeechSynthesisUtterance();
-                            msg.voice = voices[3]; 
+                            msg.voice = voices[1]; 
                             msg.text = info.question;
                             msg.pitch = 0
                             msg.rate = 1;
                             speechSynthesis.speak(msg);
                             msg.text = info.answer;
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[1]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[2]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[3]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[4]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[5]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[6]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[7]; 
+                            speechSynthesis.speak(msg);
+                            msg.voice = voices[8]; 
                             speechSynthesis.speak(msg);
                         } else {
                             synth.cancel();
