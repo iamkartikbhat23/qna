@@ -31,12 +31,15 @@
                 <div class="text-center text-gray-100 text-2xl -ml-5">
                     Interview Q&A
                 </div>
-                <div></div>
+                <div>
+                    
+                </div>
             </div>
             <div class="flex justify-center w-full px-1">
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
-                    <div class="md:min-w-6xl my-5 font-semibold">
+                    <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
+                        <select id="voiceSelect"></select>
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
                         <div class="flex justify-center">
@@ -167,6 +170,32 @@
 
 
             const voices = synth.getVoices();
+
+            function populateVoiceList() {
+                if (typeof speechSynthesis === 'undefined') {
+                    return;
+                }
+
+                const voices = speechSynthesis.getVoices();
+
+                for (let i = 0; i < voices.length; i++) {
+                    const option = document.createElement('option');
+                    option.textContent = `${voices[i].name} (${voices[i].lang})`;
+
+                    if (voices[i].default) {
+                    option.textContent += ' — DEFAULT';
+                    }
+
+                    option.setAttribute('data-lang', voices[i].lang);
+                    option.setAttribute('data-name', voices[i].name);
+                    document.getElementById("voiceSelect").appendChild(option);
+                }
+                }
+
+                populateVoiceList();
+                if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = populateVoiceList;
+                }
             // setTimeout(() => {
                 // },5000);
             
