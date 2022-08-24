@@ -276,6 +276,7 @@
                             msg.rate = 1;
                             speechSynthesis.speak(msg);
                             msg.text = info.answer;
+                            msg.text = info.question;
                             speechSynthesis.speak(msg);
                             msg.voice = voices[1]; 
                             speechSynthesis.speak(msg);
