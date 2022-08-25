@@ -39,9 +39,9 @@
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
                     <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
-                        <button onclick="loadChartData()">
+                        <!-- <button onclick="loadChartData()">
                             Click
-                        </button>
+                        </button> -->
                         <!-- <select id="voiceSelect"></select> -->
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
@@ -314,6 +314,8 @@
                             speechSynthesis.speak(msg);
                             msg.text = info.answer;
                             speechSynthesis.speak(msg);
+
+                            Android.sendData({question:info.question,answer:info.answer});
                         } else {
                             synth.cancel();
                         }
