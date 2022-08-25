@@ -39,10 +39,9 @@
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
                     <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
-                        <button onclick="loadChartData()">
+                        <button onclick="callTTS()">
                             Click
                         </button>
-                        <div id="bname"></div>
                         <!-- <select id="voiceSelect"></select> -->
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
@@ -157,27 +156,7 @@
         <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
         <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bowser@2.11.0/es5.min.js"></script>
         <script>
-
-            window.addEventListener("load", () => {
-                // (B1) PARSE USER AGENT
-                var result = bowser.getParser(navigator.userAgent).getResult();
-                
-                // (B2) BROWSER INFO
-                console.log(result.browser.name);
-                document.querySelector("#bname").innerText="You are using "+ result.browser.name +" browser";
-                console.log(result.browser.version);
-                console.log(result.engine);
-                
-                // (B3) OPERATING SYSTEM
-                console.log(result.os.name);
-                console.log(result.os.version);
-                console.log(result.os.versionName);
-                
-                // (B4) PLATFORM
-                console.log(result.platform.type);
-            });
             const sheetId = '1Y9WADkBsvvdOiaG51kt7eeEbqhQQBe7WMKDIT5GuBGg';
             const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
             const sheetName = 'user-data';
@@ -186,26 +165,7 @@
             
 
             function loadChartData() {
-                let userAgent = navigator.userAgent;
-                let browserName;
-                console.log(userAgent);
-                console.log(/chrome|chromium|crios/i);
-                if(userAgent.match(/chrome|chromium|crios/i)){
-                    browserName = "chrome";
-                }else if(userAgent.match(/firefox|fxios/i)){
-                    browserName = "firefox";
-                }  else if(userAgent.match(/safari/i)){
-                    browserName = "safari";
-                }else if(userAgent.match(/opr\//i)){
-                    browserName = "opera";
-                } else if(userAgent.match(/edg/i)){
-                    browserName = "edge";
-                }else{
-                    browserName="No browser detection";
-                }
-                
-                document.querySelector("#bname").innerText="You are using "+ browserName +" browser";
-                // Android.sendData("I am Kartik");
+                Android.sendData("I am Kartik");
             }
 
             const data = []
@@ -355,12 +315,16 @@
                             msg.text = info.answer;
                             speechSynthesis.speak(msg);
 
-                            Android.sendData({question:info.question,answer:info.answer});
+                            // callTTS(info.question,info.answer);
                         } else {
                             synth.cancel();
                         }
                     }
                 }
+            }
+
+            function callTTS(question,answer) {
+                Android.sendData({question:question,answer:answer});
             }
         </script>
         <script></script>
