@@ -39,9 +39,9 @@
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
                     <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
-                        <button onclick="callTTS()">
+                        <!-- <button onclick="callTTS()">
                             Click
-                        </button>
+                        </button> -->
                         <!-- <select id="voiceSelect"></select> -->
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
@@ -81,7 +81,7 @@
                                                 
                                                 </div>
                                                 <div class="flex justify-end">
-                                                    <span x-show="info.play" @click="utter(info,true),info.play=!info.play"><lottie-player  src="https://assets2.lottiefiles.com/packages/lf20_aolblx3z.json"  background="transparent"  speed="1"  style="width: 50px; height: 50px;" loop autoplay></lottie-player></span>
+                                                    <span x-show="info.play" @click="utter(info,true),info.play=!info.play,callTTS(info,true)"><lottie-player  src="https://assets2.lottiefiles.com/packages/lf20_aolblx3z.json"  background="transparent"  speed="1"  style="width: 50px; height: 50px;" loop autoplay></lottie-player></span>
                                                     <span x-show="!info.play" @click="utter(info,false),info.play=!info.play"><lottie-player  src="https://assets9.lottiefiles.com/packages/lf20_vCEhKC.json"  background="transparent"  speed="1"  style="width: 50px; height: 50px;" loop autoplay></lottie-player></span>
                                                     <!-- <span x-show="!info.play" @click="utter(info,false),info.play=!info.play" class="material-icons text-3xl text-red-500">
                                                         cancel
@@ -323,8 +323,10 @@
                 }
             }
 
-            function callTTS(question,answer) {
-                Android.sendData({question:question,answer:answer});
+            function callTTS(info,status) {
+                // console.log("INFo Here");
+                // console.log(info);
+                Android.sendData({question:info.question,answer:info.answer});
             }
         </script>
         <script></script>
