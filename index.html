@@ -39,7 +39,7 @@
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
                     <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
-                        <select id="voiceSelect"></select>
+                        <!-- <select id="voiceSelect"></select> -->
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
                         <div class="flex justify-center">
@@ -299,7 +299,7 @@
                        
                         if(status) {
                             const msg = new SpeechSynthesisUtterance();
-                            msg.voice = voices[1]; 
+                            msg.voice = voices[82]; 
                             msg.text = info.question;
                             msg.pitch = 0
                             msg.rate = 0.8;
