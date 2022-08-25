@@ -157,6 +157,15 @@
             const query = encodeURIComponent('Select *')
             const url = `${base}&sheet=${sheetName}&tq=${query}`
             
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                deviceType = "Android";
+                document.getElementById('bname').innerHTML = "Android";
+            } else {
+                deviceType = "Desktop";
+                document.getElementById('bname').innerHTML = "Desktop";
+            }
+
+
             const data = []
             // document.addEventListener('DOMContentLoaded', init)
             
@@ -254,7 +263,11 @@
                         voices = synth.getVoices();
                         if(playStatus) {
                             const msg = new SpeechSynthesisUtterance();
-                            msg.voice = voices[90] || voices[1];
+                            if(deviceType=="Android") {
+                                msg.voice = voices[82]; 
+                            } else {
+                                msg.voice = voices[90] || voices[1] ; 
+                            }
                             msg.text = info.question;
                             msg.pitch = 0
                             msg.rate = 1;
