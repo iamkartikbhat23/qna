@@ -157,7 +157,27 @@
         <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
         <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bowser@2.11.0/es5.min.js"></script>
         <script>
+
+            window.addEventListener("load", () => {
+                // (B1) PARSE USER AGENT
+                var result = bowser.getParser(navigator.userAgent).getResult();
+                
+                // (B2) BROWSER INFO
+                console.log(result.browser.name);
+                document.querySelector("#bname").innerText="You are using "+ result.browser.name +" browser";
+                console.log(result.browser.version);
+                console.log(result.engine);
+                
+                // (B3) OPERATING SYSTEM
+                console.log(result.os.name);
+                console.log(result.os.version);
+                console.log(result.os.versionName);
+                
+                // (B4) PLATFORM
+                console.log(result.platform.type);
+            });
             const sheetId = '1Y9WADkBsvvdOiaG51kt7eeEbqhQQBe7WMKDIT5GuBGg';
             const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
             const sheetName = 'user-data';
@@ -168,7 +188,8 @@
             function loadChartData() {
                 let userAgent = navigator.userAgent;
                 let browserName;
-                
+                console.log(userAgent);
+                console.log(/chrome|chromium|crios/i);
                 if(userAgent.match(/chrome|chromium|crios/i)){
                     browserName = "chrome";
                 }else if(userAgent.match(/firefox|fxios/i)){
