@@ -39,6 +39,9 @@
                 <div class="md:max-w-5xl w-full flex flex-col items-center justify-center">
                     <div class="md:min-w-6xl my-5 font-semibold flex flex-col">
                         <div class="text-gray-700 text-2xl">Academic Q&A</div>
+                        <button onclick="loadChartData()">
+                            Click
+                        </button>
                         <!-- <select id="voiceSelect"></select> -->
                     </div>
                     <div id="myTabContent" class="w-full"  x-init="loadQas">
@@ -160,6 +163,11 @@
             const query = encodeURIComponent('Select *')
             const url = `${base}&sheet=${sheetName}&tq=${query}`
             
+
+            function loadChartData() {
+                Android.sendData("I am Kartik");
+            }
+
             const data = []
             // document.addEventListener('DOMContentLoaded', init)
             
