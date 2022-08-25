@@ -78,12 +78,11 @@
                                                 
                                                 </div>
                                                 <div class="flex justify-end">
-                                                    <span x-show="info.play" @click="utter(info,true),info.play=!info.play" class="material-icons text-3xl text-green-800">
-                                                        play_circle
-                                                    </span>
-                                                    <span x-show="!info.play" @click="utter(info,false),info.play=!info.play" class="material-icons text-3xl text-red-500">
+                                                    <span x-show="info.play" @click="utter(info,true),info.play=!info.play"><lottie-player  src="https://assets2.lottiefiles.com/packages/lf20_aolblx3z.json"  background="transparent"  speed="1"  style="width: 50px; height: 50px;" loop autoplay></lottie-player></span>
+                                                    <span x-show="!info.play" @click="utter(info,false),info.play=!info.play"><lottie-player  src="https://assets9.lottiefiles.com/packages/lf20_vCEhKC.json"  background="transparent"  speed="1"  style="width: 50px; height: 50px;" loop autoplay></lottie-player></span>
+                                                    <!-- <span x-show="!info.play" @click="utter(info,false),info.play=!info.play" class="material-icons text-3xl text-red-500">
                                                         cancel
-                                                    </span>
+                                                    </span> -->
                                                 </div>
                                             </div>
                                         </div>
@@ -150,6 +149,7 @@
             </ul>
             </div>
         </div>
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
         <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
         <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
