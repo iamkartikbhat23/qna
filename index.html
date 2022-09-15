@@ -44,9 +44,7 @@
             <!-- drawer init and show -->
             <div class="flex flex-col">
                 <div class="fixed bottom-5 right-5 md:right-40 rounded-full py-2 px-3 bg-rose-700 cursor-pointer" @click="loadQas">
-                    <span class="material-icons text-3xl text-white">
-                        restart_alt
-                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                 </div>
                 <div class="flex justify-between items-center bg-indigo-500 p-3">
                     <button type="button" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
@@ -170,6 +168,14 @@
                             <span class="ml-3">Current Affairs</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="computer.html" class="flex items-center p-2 font-normal rounded-lg hover:bg-gray-100">
+                            <span class="material-icons">
+                                dvr
+                            </span>
+                            <span class="ml-3">Computer Knowledge</span>
+                        </a>
+                    </li>
                 </ul>
                 </div>
             </div>
@@ -179,6 +185,7 @@
         <script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
         <script src="https://unpkg.com/flowbite@1.5.2/dist/flowbite.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script>
             function offLoader() {
                 document.getElementById('loader').style.display = 'none';

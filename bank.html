@@ -157,6 +157,14 @@
                             <span class="ml-3">Current Affairs</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="computer.html" class="flex items-center p-2 font-normal rounded-lg hover:bg-gray-100">
+                            <span class="material-icons">
+                                dvr
+                            </span>
+                            <span class="ml-3">Computer Knowledge</span>
+                        </a>
+                    </li>
                 </ul>
                 </div>
             </div>
@@ -204,11 +212,13 @@
                         await fetch(url)
                             .then(res => res.text())
                             .then(rep => {
+                                console.log("Response");
+                                console.log(rep);
                                 //Remove additional text and extract only JSON:
                                 const jsonData = JSON.parse(rep.substring(47).slice(0, -2));
-                                // console.log("jsonData");
-                                // console.log(jsonData);
-                                // console.log(jsonData.table.rows);
+                                console.log("jsonData");
+                                console.log(jsonData);
+                                console.log(jsonData.table.rows);
                                 var qas = [];
                                 var qaArray = jsonData.table.rows;
                                 var index  = 0;
